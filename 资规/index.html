@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长合区资规分局 — 规划审批服务指南</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  background: #f0f4f1;
+  color: #2d3a2d;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #1a5c2a 0%, #0d3d18 40%, #1a4d2e 100%);
+  color: #fff;
+  padding: 28px 0 22px;
+  text-align: center;
+  box-shadow: 0 3px 16px rgba(26,92,42,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3Ccircle cx='20' cy='15' r='3'/%3E%3Ccircle cx='65' cy='20' r='4'/%3E%3Ccircle cx='12' cy='55' r='5'/%3E%3Ccircle cx='70' cy='62' r='3'/%3E%3Ccircle cx='40' cy='72' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.header .badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.header h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  position: relative;
+}
+.header .slogan-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.header .slogan-item {
+  font-size: 13px;
+  opacity: 0.9;
+  letter-spacing: 1.5px;
+  background: rgba(255,255,255,0.08);
+  padding: 4px 14px;
+  border-radius: 4px;
+}
+
+/* ===== CONTACT BAR ===== */
+.contact-bar {
+  background: #fff;
+  border-bottom: 1px solid #d8e8d8;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  color: #4a6a4a;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.contact-bar .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.contact-bar .icon {
+  font-size: 16px;
+}
+.contact-bar a {
+  color: #1a5c2a;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+.contact-bar a:hover { text-decoration: underline; }
+
+/* ===== MAIN CONTAINER ===== */
+.main-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ===== PROJECT TYPE TABS ===== */
+.tab-nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1;
+  min-width: 180px;
+  padding: 16px 20px;
+  border: 2px solid #c8dcc8;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s;
+  font-family: inherit;
+  font-size: 15px;
+  color: #4a6a4a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.tab-btn:hover {
+  border-color: #1a5c2a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26,92,42,0.12);
+}
+.tab-btn.active {
+  background: linear-gradient(135deg, #1a5c2a 0%, #1a6d35 100%);
+  color: #fff;
+  border-color: #1a5c2a;
+  box-shadow: 0 4px 16px rgba(26,92,42,0.25);
+}
+.tab-btn .tab-num {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.tab-btn .tab-label-cn {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.tab-btn .tab-label-en {
+  font-size: 10px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+/* ===== CONTENT AREA ===== */
+.tab-content {
+  display: none;
+  animation: fadeSlide 0.35s ease;
+}
+.tab-content.active { display: block; }
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== PROJECT INTRO CARD ===== */
+.project-intro {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid #1a5c2a;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.project-intro h3 {
+  font-size: 18px;
+  color: #1a5c2a;
+  margin-bottom: 8px;
+}
+.project-intro p {
+  font-size: 14px;
+  color: #5a7a5a;
+  line-height: 1.7;
+}
+
+/* ===== PROCESS CARDS ===== */
+.process-card {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  overflow: hidden;
+  border: 1px solid #e0ece0;
+  transition: box-shadow 0.2s;
+}
+.process-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.process-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.process-card-header:hover {
+  background: #f6faf6;
+}
+.process-card-header .step-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.step-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a5c2a, #1a6d35);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.step-title-group h4 {
+  font-size: 16px;
+  color: #2d3a2d;
+  margin-bottom: 2px;
+}
+.step-title-group .timeline {
+  font-size: 12px;
+  color: #1a5c2a;
+  background: #e8f5e8;
+  padding: 2px 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+.step-title-group .condition {
+  font-size: 12px;
+  color: #8a6a3a;
+  background: #fff8e8;
+  padding: 2px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: 6px;
+}
+.expand-icon {
+  font-size: 20px;
+  color: #8aa88a;
+  transition: transform 0.3s;
+}
+.process-card.open .expand-icon {
+  transform: rotate(180deg);
+  color: #1a5c2a;
+}
+
+.process-card-body {
+  display: none;
+  padding: 0 24px 20px;
+  border-top: 1px solid #e8f0e8;
+}
+.process-card.open .process-card-body {
+  display: block;
+}
+
+.process-card-body .desc {
+  font-size: 13px;
+  color: #5a7a5a;
+  line-height: 1.7;
+  padding: 16px 0 12px;
+}
+
+/* ===== MATERIALS LIST ===== */
+.materials-list {
+  list-style: none;
+}
+.materials-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #e0ece0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-radius: 6px;
+  padding: 10px 8px;
+}
+.materials-list li:hover {
+  background: #f6faf6;
+}
+.materials-list li:last-child { border-bottom: none; }
+.materials-list .checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c0d4c0;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-top: 1px;
+}
+.materials-list li.checked .checkbox {
+  background: #1a5c2a;
+  border-color: #1a5c2a;
+  color: #fff;
+}
+.materials-list .check-mark {
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.materials-list li.checked .check-mark { opacity: 1; }
+.materials-list .item-text {
+  flex: 1;
+  line-height: 1.6;
+}
+.materials-list .item-text a {
+  color: #1a5c2a;
+  text-decoration: none;
+  border-bottom: 1px dashed #1a5c2a;
+  transition: all 0.2s;
+}
+.materials-list .item-text a:hover {
+  color: #0d3d18;
+  border-bottom-style: solid;
+}
+.materials-list .item-text a::after {
+  content: ' \2B07';
+  font-size: 11px;
+  opacity: 0.5;
+}
+.materials-list li.checked .item-text {
+  color: #8aa88a;
+  text-decoration: line-through;
+}
+
+/* ===== SINGLE SECTION (补办项目) ===== */
+.single-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #e0ece0;
+}
+.single-section .section-header {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid #e8f0e8;
+}
+.single-section .section-header h3 {
+  font-size: 18px;
+  color: #1a5c2a;
+  margin-bottom: 6px;
+}
+.single-section .condition-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.single-section .condition-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: #fff3e0;
+  color: #8a5a2a;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: #1a3a1a;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  padding: 28px 16px;
+  margin-top: 32px;
+}
+.footer .footer-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.footer .footer-info {
+  font-size: 13px;
+  line-height: 2;
+  opacity: 0.8;
+}
+.footer .footer-tel {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7cc47c;
+  letter-spacing: 1px;
+}
+.footer .footer-tel a {
+  color: #7cc47c;
+  text-decoration: none;
+}
+.footer .footer-tel a:hover { text-decoration: underline; }
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1a5c2a;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: 0 4px 12px rgba(26,92,42,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header h1 { font-size: 22px; letter-spacing: 1px; }
+  .header .slogan-row { gap: 10px; }
+  .header .slogan-item { font-size: 11px; padding: 3px 10px; }
+  .contact-bar { gap: 12px; font-size: 12px; }
+  .contact-bar a { font-size: 14px; }
+  .tab-nav { flex-direction: column; }
+  .tab-btn { min-width: auto; }
+  .process-card-header { padding: 14px 16px; }
+  .step-num { width: 32px; height: 32px; font-size: 15px; }
+  .step-title-group h4 { font-size: 14px; }
+  .process-card-body { padding: 0 16px 16px; }
+  .single-section { padding: 16px; }
+}
+@media (max-width: 480px) {
+  .header h1 { font-size: 18px; }
+  .header .badge { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="badge">长三角（湖州）产业合作区</div>
+  <h1>资规分局规划审批服务指南</h1>
+  <div class="slogan-row">
+    <span class="slogan-item">依规治理高站位</span>
+    <span class="slogan-item">守土有责新担当</span>
+    <span class="slogan-item">与林同行特幸福</span>
+  </div>
+</header>
+
+<!-- ===== CONTACT BAR ===== -->
+<div class="contact-bar">
+  <div class="contact-item">
+    <span class="icon">&#128222;</span>
+    <span>服务电话：</span>
+    <a href="tel:05722393864">0572-2393864</a>
+  </div>
+  <div class="contact-item">
+    <span class="icon">&#128205;</span>
+    <span>地址：长合区管委会1217办公室（安吉县天子湖镇东阳路1号）</span>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-container">
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="supplementary" onclick="switchTab('supplementary')">
+      <span class="tab-num">01</span>
+      <span class="tab-label-cn">补办项目</span>
+      <span class="tab-label-en">Supplementary Project</span>
+    </button>
+    <button class="tab-btn" data-tab="newland" onclick="switchTab('newland')">
+      <span class="tab-num">02</span>
+      <span class="tab-label-cn">新拿地项目</span>
+      <span class="tab-label-en">Newly Acquired Land</span>
+    </button>
+    <button class="tab-btn" data-tab="zeroland" onclick="switchTab('zeroland')">
+      <span class="tab-num">03</span>
+      <span class="tab-label-cn">零土地技改项目</span>
+      <span class="tab-label-en">Zero-land Tech Transformation</span>
+    </button>
+  </nav>
+
+  <!-- ========== TAB 1: 补办项目 ========== -->
+  <div class="tab-content active" id="tab-supplementary">
+    <div class="project-intro">
+      <h3>补办项目</h3>
+      <p>适用于未取得规划许可、未按照规划许可规定进行建设的项目，经评估后尚可采取改正措施消除对规划实施的影响的。需经执法部门查处完毕并出具执结证明（处建设工程造价百分之五以上百分之十以下的罚款）。</p>
+    </div>
+
+    <div class="single-section">
+      <div class="section-header">
+        <h3>建设工程规划许可证（补办）</h3>
+        <div class="condition-tags">
+          <span class="condition-tag">先决条件：执法部门查处完毕 + 执结证明</span>
+          <span class="condition-tag">罚款标准：工程造价 5%–10%</span>
+        </div>
+      </div>
+      <ul class="materials-list" id="supplementary-list">
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="《建设工程规划许可证》申请表.docx" download>《建设工程规划许可证》申请表</a></span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">经执法部门查处完毕并出具执结证明</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">使用土地的有关证明文件</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">拟补办建筑实测面积表及实测地形图</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">与实际一致的1:500总平面布置图及建筑施工图</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">未批先建相关情况说明（属地确认）</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">组织机构代码证</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设项目立项文件</span></li>
+        <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">房屋质量安全鉴定报告（B级及以上）</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ========== TAB 2: 新拿地项目 ========== -->
+  <div class="tab-content" id="tab-newland">
+    <div class="project-intro">
+      <h3>新拿地项目</h3>
+      <p>新取得国有建设用地出让合同的项目，依次办理建设用地规划许可、建设工程规划许可、土地核验和规划核实三个环节。全流程线上可办。</p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">1</span>
+          <div class="step-title-group">
+            <h4>建设用地规划许可</h4>
+            <span class="timeline">办理时限：3个工作日</span>
+            <span class="condition">申报节点：取得国有建设用地出让合同后</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">取得国有建设用地出让合同后即可申请办理，法定时限内完成审批。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="《建设用地规划许可证》申请表.docx" download>《建设用地规划许可证》申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设项目立项文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括电子文件）</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">土地出让合同</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">组织机构代码证</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">2</span>
+          <div class="step-title-group">
+            <h4>建设工程规划许可</h4>
+            <span class="timeline">办理时限：4个工作日</span>
+            <span class="condition">申报节点：有土地权属证明并完成建设工程设计方案</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">需先取得土地权属证明，并完成建设工程设计方案后可申请。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="《建设工程规划许可证》申请表.docx" download>《建设工程规划许可证》申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">使用土地的有关证明文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设工程设计方案</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">组织机构代码证</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设项目立项文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括电子文件）</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">3</span>
+          <div class="step-title-group">
+            <h4>土地核验和规划核实</h4>
+            <span class="timeline">办理时限：5个工作日</span>
+            <span class="condition">申报节点：工程全部竣工 + 应拆除建筑已拆除</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">建设工程规划许可证许可的各项工程内容已全部竣工，规划许可确定应当予以拆除的建、构筑物和临时建筑及设施均按要求拆除。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="土地核验和规划核实申请表.docX" download>土地核验和规划核实申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">工商营业执照或组织机构代码证复印件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">授权委托书及委托身份证明</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">不动产权证书或用地批准文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设工程规划许可证及附件附图</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">竣工测绘报告及图件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括范围线、基底线）</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 3: 零土地技改项目 ========== -->
+  <div class="tab-content" id="tab-zeroland">
+    <div class="project-intro">
+      <h3>零土地技改项目</h3>
+      <p>在原有土地范围内进行技术改造升级，不新增建设用地。依次办理建设用地规划许可、建设工程规划许可、土地核验和规划核实三个环节。</p>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">1</span>
+          <div class="step-title-group">
+            <h4>建设用地规划许可</h4>
+            <span class="timeline">办理时限：4个工作日</span>
+            <span class="condition">申报节点：有土地权属证明并完成建设工程设计方案</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">需有土地权属证明并完成建设工程设计方案后申请。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="《建设工程规划许可证》申请表.docx" download>《建设工程规划许可证》申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">使用土地的有关证明文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设工程设计方案</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">组织机构代码证</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设项目立项文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括电子文件）</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">2</span>
+          <div class="step-title-group">
+            <h4>建设工程规划许可</h4>
+            <span class="timeline">办理时限：4个工作日</span>
+            <span class="condition">申报节点：有土地权属证明并完成建设工程设计方案</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">需先取得土地权属证明，并完成建设工程设计方案后可申请。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="《建设工程规划许可证》申请表.docx" download>《建设工程规划许可证》申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">使用土地的有关证明文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设工程设计方案</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">组织机构代码证</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设项目立项文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括电子文件）</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="process-card" onclick="toggleCard(this)">
+      <div class="process-card-header">
+        <div class="step-info">
+          <span class="step-num">3</span>
+          <div class="step-title-group">
+            <h4>土地核验和规划核实</h4>
+            <span class="timeline">办理时限：5个工作日</span>
+            <span class="condition">申报节点：工程全部竣工 + 应拆除建筑已拆除</span>
+          </div>
+        </div>
+        <span class="expand-icon">&#9660;</span>
+      </div>
+      <div class="process-card-body">
+        <p class="desc">建设工程规划许可证许可的各项工程内容已全部竣工。</p>
+        <ul class="materials-list" onclick="event.stopPropagation()">
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text"><a href="土地核验和规划核实申请表.docX" download>土地核验和规划核实申请表</a></span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">工商营业执照或组织机构代码证复印件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">授权委托书及委托身份证明</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">不动产权证书或用地批准文件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">建设工程规划许可证及附件附图</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">竣工测绘报告及图件</span></li>
+          <li onclick="toggleCheck(this)"><span class="checkbox"><span class="check-mark">&#10003;</span></span><span class="item-text">用地红线图（包括范围线、基底线）</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-title">长合区资规分局</div>
+  <div class="footer-info">
+    服务电话：<span class="footer-tel"><a href="tel:05722393864">0572-2393864</a></span><br>
+    地址：长合区管委会1217办公室（安吉县天子湖镇东阳路1号）<br>
+    长三角（湖州）产业合作区 · 二〇二五年六月
+  </div>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="回到顶部">&#9650;</button>
+
+<script>
+// Tab switching
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+  document.getElementById(`tab-${tabName}`).classList.add('active');
+}
+
+// Toggle process card expand/collapse
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+
+// Toggle material checklist item
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+}
+
+// Back to top visibility
+window.addEventListener('scroll', function() {
+  var btn = document.getElementById('backToTop');
+  if (window.scrollY > 300) {
+    btn.classList.add('visible');
+  } else {
+    btn.classList.remove('visible');
+  }
+});
+
+// Open first card of initial tab by default
+document.addEventListener('DOMContentLoaded', function() {
+  var activeTab = document.querySelector('.tab-content.active');
+  if (activeTab) {
+    var firstCard = activeTab.querySelector('.process-card');
+    if (firstCard) firstCard.classList.add('open');
+  }
+});
+
+// Store checklist state in localStorage
+document.querySelectorAll('.materials-list').forEach(function(list) {
+  var listId = list.id;
+  if (!listId) return;
+  // Restore state
+  var saved = localStorage.getItem('checklist-' + listId);
+  if (saved) {
+    var checked = JSON.parse(saved);
+    list.querySelectorAll('li').forEach(function(li, i) {
+      if (checked[i]) li.classList.add('checked');
+    });
+  }
+  // Save state on change
+  list.addEventListener('click', function() {
+    setTimeout(function() {
+      var states = [];
+      list.querySelectorAll('li').forEach(function(li) {
+        states.push(li.classList.contains('checked'));
+      });
+      localStorage.setItem('checklist-' + listId, JSON.stringify(states));
+    }, 100);
+  });
+});
+</script>
+
+</body>
+</html>

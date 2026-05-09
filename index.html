@@ -272,6 +272,14 @@ body {
 }
 .node.end .num { background: #2E7D32; }
 
+.node.construction-phase {
+  border-style: dashed;
+  background: #f9f9f9;
+  cursor: default;
+  min-width: 300px;
+}
+.node.construction-phase .name { font-size: 16px; color: #666; }
+
 /* Branch container */
 .branch-container {
   display: flex;
@@ -473,13 +481,197 @@ body {
   background: #fff;
 }
 
-/* ===== RESPONSIVE ===== */
+/* Phone link */
+.phone-link { color: #C41230; text-decoration: underline; font-weight: 700; white-space: nowrap; }
+.phone-link:hover { color: #8B0000; }
+
+/* ===== MOBILE-FIRST RESPONSIVE ===== */
+
+/* Tablet (≤1024px) */
+@media (max-width: 1024px) {
+  .flowchart { min-width: 0; padding: 10px 0 30px; }
+  .flow-wrapper { margin: 12px 8px 24px; padding: 16px 12px; }
+  .toolbar { padding: 0 12px; flex-direction: column; align-items: flex-start; }
+  .branch-container { gap: 16px; }
+  .phase-divider { max-width: 100%; }
+}
+
+/* Phone (≤768px) */
 @media (max-width: 768px) {
-  .header h1 { font-size: 20px; }
-  .node { min-width: 100px; max-width: 150px; padding: 10px 12px; }
+  /* Header */
+  .header { padding: 16px 12px; }
+  .header h1 { font-size: 20px; letter-spacing: 1px; }
+  .header .subtitle { font-size: 13px; }
+  .header .dept { font-size: 11px; }
+
+  /* Toolbar */
+  .toolbar { margin-top: 10px; gap: 8px; }
+  .toolbar .badge { font-size: 12px; padding: 6px 12px; width: 100%; }
+  .toolbar .legend { gap: 8px; flex-wrap: wrap; font-size: 11px; }
+
+  /* Flow wrapper */
+  .flow-wrapper { margin: 10px 6px 20px; padding: 12px 8px; border-radius: 3px; }
+  .flow-title { font-size: 18px; }
+  .flow-subtitle { font-size: 12px; margin-bottom: 20px; }
+
+  /* Flowchart — full width single column */
+  .flowchart { min-width: 0; padding: 0 4px 20px; width: 100%; }
+
+  /* Branch containers stack vertically */
+  .branch-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+  .branch-col { width: 100%; align-items: center; }
+
+  /* Phase divider */
+  .phase-divider { margin: 16px 0 12px; gap: 8px; }
+  .phase-divider .label { font-size: 11px; letter-spacing: 1px; padding: 2px 8px; }
+
+  /* Connector arrows */
+  .connector-down { height: 22px; }
+
+  /* Node cards */
+  .node {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    padding: 12px 14px;
+    margin: 0;
+  }
+  .node .num { width: 22px; height: 22px; line-height: 22px; font-size: 11px; }
+  .node .name { font-size: 13px; }
+  .node .contact-hint { font-size: 10px; }
+
+  .node.start, .node.end, .node.construction-phase { min-width: 0; width: 100%; }
+  .node.construction-phase .name { font-size: 13px; }
+
+  /* Tap indicator on clickable nodes */
+  .node:not(.start):not(.end):not(.construction-phase)::after {
+    content: '›';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #C41230;
+    font-weight: 700;
+  }
+  .node:not(.start):not(.end):not(.construction-phase) {
+    padding-right: 32px;
+  }
+
+  /* Parallel badge */
+  .parallel-badge { font-size: 10px; padding: 2px 6px; margin: 0; }
+
+  /* Modal — full screen */
+  .modal-overlay { padding: 0; align-items: stretch; }
+  .modal {
+    max-width: 100%;
+    border-radius: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-body { flex: 1; max-height: none; padding: 16px 14px; }
+  .modal-body h3 { font-size: 15px; }
+  .modal-body .info-card { padding: 10px 12px; font-size: 13px; }
+  .modal-body .info-card table { font-size: 12px; }
+  .modal-body .info-card table th,
+  .modal-body .info-card table td { padding: 6px 8px; }
+  .modal-body .contact { flex-direction: column; gap: 10px; }
+  .modal-body .contact-item { min-width: 0; }
+  .modal-header { padding: 14px 16px; }
+  .modal-header h2 { font-size: 17px; }
+  .modal-footer { padding: 10px 14px; }
+  .modal-footer button { width: 100%; padding: 12px; font-size: 15px; }
+
+  /* Footer */
+  .footer { font-size: 11px; padding: 14px 10px; }
+}
+
+/* Small Phone (≤400px) */
+@media (max-width: 400px) {
+  .header h1 { font-size: 17px; }
+  .header .subtitle { font-size: 11px; }
+  .flow-title { font-size: 16px; }
+  .node { padding: 10px 10px; }
   .node .name { font-size: 12px; }
-  .modal { max-width: 95%; }
-  .branch-container { flex-direction: column; align-items: center; gap: 16px; }
+  .modal-body { padding: 12px 10px; }
+  .modal-body .info-card table { font-size: 11px; }
+  .modal-body .info-card table th,
+  .modal-body .info-card table td { padding: 5px 6px; }
+}
+
+/* ===== TOUCH OPTIMIZATIONS ===== */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover effects on touch devices */
+  .node:hover {
+    transform: none;
+    box-shadow: 0 2px 6px rgba(196,18,48,0.08);
+    border-color: inherit;
+    background: #fff;
+  }
+  .node.phase-prep:hover { border-color: #8B0000; background: #fff; }
+  .node.phase-design:hover { border-color: #C41230; background: #fff; }
+  .node.phase-permit:hover { border-color: #DAA520; background: #fff; }
+  .node.phase-accept:hover { border-color: #2E7D32; background: #fff; }
+
+  /* Active tap feedback instead */
+  .node {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .node:active {
+    transform: scale(0.97);
+    background: #fdf5f5 !important;
+    border-color: #8B0000 !important;
+  }
+
+  /* Larger touch targets */
+  .modal-header .close-btn {
+    width: 44px; height: 44px;
+    line-height: 44px;
+    font-size: 32px;
+  }
+}
+
+/* ===== TABLES ON SMALL SCREENS ===== */
+@media (max-width: 500px) {
+  .modal-body .info-card {
+    padding: 0;
+    background: none;
+  }
+  .modal-body .info-card table {
+    display: block;
+  }
+  .modal-body .info-card table thead {
+    display: none; /* hide header on very small screens */
+  }
+  .modal-body .info-card table tbody {
+    display: block;
+  }
+  .modal-body .info-card table tr {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .modal-body .info-card table td {
+    display: block;
+    border: none;
+    padding: 3px 0;
+    font-size: 13px;
+  }
+  .modal-body .info-card table td:first-child {
+    font-weight: 700;
+    color: #C41230;
+    min-width: 30px;
+    margin-right: 8px;
+  }
 }
 
 /* Scrollbar */
@@ -663,8 +855,8 @@ body {
     </div>
 
     <!-- Row: 主体建设 note -->
-    <div class="node" style="border-style:dashed; background:#f9f9f9; cursor:default; min-width:300px;">
-      <div class="name" style="font-size:16px; color:#666;">🏗️ 主体建设（施工阶段）</div>
+    <div class="node construction-phase">
+      <div class="name">🏗️ 主体建设（施工阶段）</div>
     </div>
 
     <div class="connector-down"></div>
@@ -1050,7 +1242,7 @@ function openDetail(id) {
     d.contacts.forEach(c => {
       html += '<div class="contact-item">';
       html += '<div class="label">经办单位</div><div class="value">' + c.unit + '</div>';
-      html += '<div class="label" style="margin-top:8px;">经办人 / 电话</div><div class="value">' + c.person + ' / ' + c.phone + '</div>';
+      html += '<div class="label" style="margin-top:8px;">经办人 / 电话</div><div class="value">' + c.person + ' / <a href="tel:' + c.phone + '" class="phone-link">' + c.phone + '</a></div>';
       html += '<div class="label" style="margin-top:8px;">服务地址</div><div class="value" style="font-size:13px;">' + c.address + '</div>';
       html += '</div>';
     });
@@ -1061,7 +1253,7 @@ function openDetail(id) {
     html += '<div class="contact-item">';
     html += '<div class="label">经办单位</div><div class="value">' + d.contact.unit + '</div>';
     html += '<div class="label" style="margin-top:8px;">经办人</div><div class="value">' + d.contact.person + '</div>';
-    html += '<div class="label" style="margin-top:8px;">联系电话</div><div class="value">' + d.contact.phone + '</div>';
+    html += '<div class="label" style="margin-top:8px;">联系电话</div><div class="value"><a href="tel:' + d.contact.phone + '" class="phone-link">' + d.contact.phone + '</a></div>';
     html += '</div>';
     html += '<div class="contact-item">';
     html += '<div class="label">服务地址</div><div class="value" style="font-size:14px;">' + (d.address || '—') + '</div>';

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>长三角（湖州）产业合作区 — 投资企业落地建设全流程指南</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  background: #f0f0f0;
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: linear-gradient(135deg, #C41230 0%, #a00d25 100%);
+  color: #fff;
+  padding: 24px 0;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(196,18,48,0.3);
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: relative;
+}
+.header .subtitle {
+  font-size: 14px;
+  margin-top: 6px;
+  opacity: 0.9;
+  letter-spacing: 1px;
+  position: relative;
+}
+.header .dept {
+  font-size: 13px;
+  margin-top: 10px;
+  opacity: 0.8;
+  position: relative;
+}
+
+/* ===== TOOLBAR ===== */
+.toolbar {
+  max-width: 1400px;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.toolbar .badge {
+  background: #fff;
+  border-left: 4px solid #C41230;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #666;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.toolbar .legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #888;
+  align-items: center;
+}
+.legend-dot {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.legend-dot.phase1 { background: #8B0000; }
+.legend-dot.phase2 { background: #C41230; }
+.legend-dot.phase3 { background: #DAA520; }
+.legend-dot.phase4 { background: #2E7D32; }
+
+/* ===== FLOW CONTAINER ===== */
+.flow-wrapper {
+  max-width: 1400px;
+  margin: 20px auto 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-x: auto;
+}
+
+.flow-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #C41230;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.flow-subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 30px;
+}
+
+/* ===== FLOWCHART ===== */
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  min-width: 1100px;
+  padding: 10px 20px 40px;
+}
+
+/* Phase rows */
+.phase-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  position: relative;
+}
+
+/* Connector lines between rows */
+.connector-down {
+  width: 2px;
+  height: 28px;
+  background: #c41230;
+  margin: 0 auto;
+  position: relative;
+}
+.connector-down::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid #c41230;
+}
+
+/* Horizontal connector between nodes in same row */
+.connector-h {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 6px 0;
+}
+.connector-h .line {
+  width: 40px;
+  height: 2px;
+  background: #c41230;
+}
+.connector-h .arrow {
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid #c41230;
+}
+
+/* Phase divider */
+.phase-divider {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+}
+.phase-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c41230, transparent);
+}
+.phase-divider .label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #C41230;
+  white-space: nowrap;
+  letter-spacing: 2px;
+  background: #fff;
+  padding: 2px 12px;
+  border: 1px solid #C41230;
+  border-radius: 2px;
+}
+
+/* ===== NODE CARD ===== */
+.node {
+  background: #fff;
+  border: 2px solid #C41230;
+  border-radius: 4px;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+  min-width: 140px;
+  max-width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(196,18,48,0.08);
+}
+.node:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(196,18,48,0.2);
+  border-color: #8B0000;
+  background: #fdf5f5;
+}
+.node:active {
+  transform: translateY(0);
+}
+.node .num {
+  display: inline-block;
+  width: 26px; height: 26px;
+  line-height: 26px;
+  border-radius: 50%;
+  background: #C41230;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.node .name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.4;
+}
+.node .contact-hint {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Node variants */
+.node.phase-prep { border-color: #8B0000; }
+.node.phase-prep .num { background: #8B0000; }
+.node.phase-design { border-color: #C41230; }
+.node.phase-design .num { background: #C41230; }
+.node.phase-permit { border-color: #DAA520; }
+.node.phase-permit .num { background: #B8860B; }
+.node.phase-accept { border-color: #2E7D32; }
+.node.phase-accept .num { background: #2E7D32; }
+
+/* Start / End nodes */
+.node.start {
+  border: 2px dashed #C41230;
+  background: #fdf5f5;
+  min-width: 200px;
+}
+.node.end {
+  border: 2px solid #2E7D32;
+  background: #e8f5e9;
+  min-width: 200px;
+}
+.node.end .num { background: #2E7D32; }
+
+/* Branch container */
+.branch-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+.branch-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* Parallel indicator */
+.parallel-badge {
+  font-size: 11px;
+  color: #C41230;
+  background: #fff0f0;
+  border: 1px dashed #C41230;
+  padding: 2px 8px;
+  border-radius: 2px;
+  margin: 4px 0;
+  text-align: center;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 20px;
+  overflow-y: auto;
+}
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 6px;
+  max-width: 750px;
+  width: 100%;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  overflow: hidden;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #C41230, #8B0000);
+  color: #fff;
+  padding: 20px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-header h2 {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+.modal-header .close-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+  width: 36px; height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.modal-header .close-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.modal-body {
+  padding: 24px 28px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.modal-body h3 {
+  font-size: 16px;
+  color: #C41230;
+  margin: 20px 0 10px;
+  padding-left: 12px;
+  border-left: 3px solid #C41230;
+}
+.modal-body h3:first-child {
+  margin-top: 0;
+}
+.modal-body .info-card {
+  background: #fafafa;
+  border-radius: 4px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.modal-body .info-card table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.modal-body .info-card table th,
+.modal-body .info-card table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 12px;
+  text-align: left;
+}
+.modal-body .info-card table th {
+  background: #C41230;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.modal-body .info-card table tr:nth-child(even) td {
+  background: #fff;
+}
+.modal-body .contact {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.modal-body .contact-item {
+  flex: 1;
+  min-width: 200px;
+  background: #fdf5f5;
+  border-left: 3px solid #C41230;
+  padding: 12px 16px;
+  border-radius: 2px;
+}
+.modal-body .contact-item .label {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 4px;
+}
+.modal-body .contact-item .value {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+.modal-body ul {
+  list-style: none;
+  padding: 0;
+}
+.modal-body ul li {
+  position: relative;
+  padding: 6px 0 6px 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.modal-body ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 14px;
+  width: 6px; height: 6px;
+  background: #C41230;
+  border-radius: 50%;
+}
+
+.modal-footer {
+  padding: 14px 28px;
+  border-top: 1px solid #eee;
+  text-align: right;
+  background: #fafafa;
+}
+.modal-footer button {
+  padding: 8px 28px;
+  background: #C41230;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+.modal-footer button:hover {
+  background: #8B0000;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+  color: #aaa;
+  border-top: 1px solid #e0e0e0;
+  background: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .header h1 { font-size: 20px; }
+  .node { min-width: 100px; max-width: 150px; padding: 10px 12px; }
+  .node .name { font-size: 12px; }
+  .modal { max-width: 95%; }
+  .branch-container { flex-direction: column; align-items: center; gap: 16px; }
+}
+
+/* Scrollbar */
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 3px; }
+.modal-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <h1>长三角（湖州）产业合作区</h1>
+  <div class="subtitle">投资企业落地建设全流程指南</div>
+  <div class="dept">长合区建设发展局 ｜ 二〇二五年六月</div>
+</div>
+
+<!-- ===== TOOLBAR ===== -->
+<div class="toolbar">
+  <div class="badge">📋 共 17 个流程节点，点击节点查看所需材料及经办信息</div>
+  <div class="legend">
+    <span><span class="legend-dot phase1"></span>立项准备</span>
+    <span><span class="legend-dot phase2"></span>设计审查</span>
+    <span><span class="legend-dot phase3"></span>许可办理</span>
+    <span><span class="legend-dot phase4"></span>验收登记</span>
+  </div>
+</div>
+
+<!-- ===== FLOWCHART ===== -->
+<div class="flow-wrapper">
+  <div class="flow-title">项目推进全流程</div>
+  <div class="flow-subtitle">点击各节点查看办理流程、所需材料及联系方式</div>
+
+  <div class="flowchart">
+
+    <!-- ===== PHASE 1: 立项准备 ===== -->
+    <div class="phase-divider">
+      <span class="line"></span><span class="label">阶 段 一 · 立 项 准 备</span><span class="line"></span>
+    </div>
+
+    <!-- Start node -->
+    <div class="node start">
+      <div class="name" style="font-size:16px;">🏭 项目启动</div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 01, 02 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-prep" onclick="openDetail(1)">
+          <div class="num">01</div>
+          <div class="name">建设项目立项备案</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="parallel-badge">可并行办理</div>
+        <div class="node phase-prep" onclick="openDetail(2)">
+          <div class="num">02</div>
+          <div class="name">公司注册（代办）</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 03, 04, 05 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-prep" onclick="openDetail(3)">
+          <div class="num">03</div>
+          <div class="name">安全设施"三同时"</div>
+          <div class="contact-hint">应急管理局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="node phase-prep" onclick="openDetail(4)">
+          <div class="num">04</div>
+          <div class="name">节能审查</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="node phase-prep" onclick="openDetail(5)">
+          <div class="num">05</div>
+          <div class="name">环境影响评价</div>
+          <div class="contact-hint">生态环境分局</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PHASE 2: 设计审查 ===== -->
+    <div class="phase-divider">
+      <span class="line"></span><span class="label">阶 段 二 · 设 计 审 查</span><span class="line"></span>
+    </div>
+
+    <!-- Row: Node 06 -->
+    <div class="node phase-design" onclick="openDetail(6)">
+      <div class="num">06</div>
+      <div class="name">勘察项目信息报备</div>
+      <div class="contact-hint">建设发展局</div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 07, 08 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-design" onclick="openDetail(7)">
+          <div class="num">07</div>
+          <div class="name">施工图设计文件审查</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="parallel-badge">可并行办理</div>
+        <div class="node phase-design" onclick="openDetail(8)">
+          <div class="num">08</div>
+          <div class="name">消防设计审查</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PHASE 3: 许可办理 ===== -->
+    <div class="phase-divider">
+      <span class="line"></span><span class="label">阶 段 三 · 许 可 办 理</span><span class="line"></span>
+    </div>
+
+    <!-- Row: Node 09, 10 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-permit" onclick="openDetail(9)">
+          <div class="num">09</div>
+          <div class="name">建设工程规划许可</div>
+          <div class="contact-hint">自规分局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="parallel-badge">可并行办理</div>
+        <div class="node phase-permit" onclick="openDetail(10)">
+          <div class="num">10</div>
+          <div class="name">规划用地许可</div>
+          <div class="contact-hint">自规分局</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 11, 12, 13 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-permit" onclick="openDetail(11)">
+          <div class="num">11</div>
+          <div class="name">污水排水管网许可</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="node phase-permit" onclick="openDetail(12)">
+          <div class="num">12</div>
+          <div class="name">建筑工程施工许可</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="node phase-permit" onclick="openDetail(13)">
+          <div class="num">13</div>
+          <div class="name">质安监登记</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PHASE 4: 验收登记 ===== -->
+    <div class="phase-divider">
+      <span class="line"></span><span class="label">阶 段 四 · 验 收 登 记</span><span class="line"></span>
+    </div>
+
+    <!-- Row: 主体建设 note -->
+    <div class="node" style="border-style:dashed; background:#f9f9f9; cursor:default; min-width:300px;">
+      <div class="name" style="font-size:16px; color:#666;">🏗️ 主体建设（施工阶段）</div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 14 -->
+    <div class="node phase-accept" onclick="openDetail(14)">
+      <div class="num">14</div>
+      <div class="name">节点验收及竣工验收</div>
+      <div class="contact-hint">建设发展局</div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 15, 16 (parallel) -->
+    <div class="branch-container">
+      <div class="branch-col">
+        <div class="node phase-accept" onclick="openDetail(15)">
+          <div class="num">15</div>
+          <div class="name">土地核验和规划核实</div>
+          <div class="contact-hint">自规分局</div>
+        </div>
+      </div>
+      <div class="branch-col">
+        <div class="parallel-badge">可并行办理</div>
+        <div class="node phase-accept" onclick="openDetail(16)">
+          <div class="num">16</div>
+          <div class="name">消防验收</div>
+          <div class="contact-hint">建设发展局</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- Row: Node 17 -->
+    <div class="node phase-accept" onclick="openDetail(17)">
+      <div class="num">17</div>
+      <div class="name">竣工验收备案</div>
+      <div class="contact-hint">建设发展局</div>
+    </div>
+
+    <div class="connector-down"></div>
+
+    <!-- End node -->
+    <div class="node end">
+      <div class="name" style="font-size:16px;">✅ 办理不动产权证</div>
+    </div>
+
+  </div><!-- /flowchart -->
+</div><!-- /flow-wrapper -->
+
+<div class="footer">
+  长三角（湖州）产业合作区建设发展局 ｜ 本指南会因优化办事流程而实时调整，请以对接办理的各局办为准
+</div>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h2 id="modalTitle">流程详情</h2>
+      <button class="close-btn" onclick="closeModalDirect()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button onclick="closeModalDirect()">关 闭</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const data = {
+  1: {
+    title: '01 建设项目立项备案',
+    process: [
+      '1、项目编写可行性研究报告，初步确定产品情况、产品工艺流程、主要设备、项目建设方案等内容；',
+      '2、填写准入预评审申请表并上大前办会议进行评审，投促局待评审通过之后出会议纪要；',
+      '3、做好工商注册，即名称核准、营业执照、公章、财务章、法人章、银行开户；',
+      '4、与自规部门对接获得地块规划设计范围及要求；',
+      '5、以上工作完成之后，申请政务网账号，申请附码及备案，并上传会议纪要、法人身份证、营业执照、红线图或者蓝线图、可行性研究报告。'
+    ],
+    contact: { unit: '建设发展局', person: '张家喜', phone: '15088380129' },
+    address: '长合区管委会1206办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '会议纪要',
+      '法人身份证',
+      '营业执照',
+      '红线图或蓝线图',
+      '可行性研究报告'
+    ]
+  },
+  2: {
+    title: '02 公司注册信息准备清单（代办）',
+    process: [
+      '1、确定公司名称（冠"浙江"字样需注册资本≥1000万，提前准备3个名称进行核名）；',
+      '2、确定股东信息（营业执照/自然人身份证正反面及本人电话）、出资比例；',
+      '3、确定注册资本金额及各股东出资比例；',
+      '4、确定出资方式（货币、实物等）；',
+      '5、确定经营范围（需通过 https://zj.jyfwyun.com/#/visitor/home 进行标准化核实）；',
+      '6、确定出资时间（5年期，日期建议设为月底，《新公司法》2024年7月起实行，注册资金需5年内全部到账）；',
+      '7、确定组织架构成员（执行董事、经理、监事、财务、联络员，所有人员需提供身份证正反面照片及本人实名手机长号）；',
+      '8、确定纳税人类型（一般纳税人或小规模纳税人）；',
+      '9、公积金缴纳比例（5%-12%之间，需明确具体比例）；',
+      '10、确定印章类型（公章、法人章、合同章、发票章、财务章，外资企业需确认是否为中文章）；',
+      '11、其他必备材料：股东在"浙里办"APP完成电子签名；租赁项目提供租赁合同原件。'
+    ],
+    contact: { unit: '建设发展局', person: '陈海瑞', phone: '13305820312' },
+    address: '长合区管委会1211、1213办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '公司名称核准材料（3个备选名称）',
+      '股东身份证正反面照片及电话',
+      '注册资本及出资比例信息',
+      '经营范围说明',
+      '出资时间说明',
+      '组织架构成员身份信息（执行董事/经理/监事/财务/联络员）',
+      '纳税人类型确认',
+      '公积金缴纳比例确认',
+      '印章类型确认',
+      '"浙里办"APP电子签名（股东）'
+    ]
+  },
+  3: {
+    title: '03 工业企业建设项目安全设施"三同时"（化工项目"三同时"）',
+    process: [
+      '1、选定安全评价单位；',
+      '2、编制安全评价方案；',
+      '3、提交应急管理局评审；',
+      '4、编制正式文本。',
+      '注：安全设施"三同时"指安全设施与主体工程同时设计、同时施工、同时投入生产和使用。'
+    ],
+    contact: { unit: '应急管理局', person: '孙玮', phone: '17858936313' },
+    address: '长合区管委会1113办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '安全评价方案',
+      '相关申报表格（具体请联系经办人）'
+    ]
+  },
+  4: {
+    title: '04 固定资产投资项目节能审查',
+    process: [
+      '1、企业首先确定主要产品、工艺流程、主要设备及设备用能情况；',
+      '2、根据生产工艺、设备功率等情况确定大致一年所需电、气、热等能源数量，并折算出标准煤；',
+      '3、年用能在1000吨标准煤以下：填写固定资产节能审查承诺书，待建设发展局审核通过之后出具节能审查意见；',
+      '4、年用能在1000-5000吨标准煤：确定编制单位编写节能审查报告 → 专家评审会 → 修改签字 → 政务网上报 → 建设发展局出具批复；',
+      '5、年用能在5000-50000吨标准煤：编制报告 → 长合区专家评审会（初审）→ 长合区出具初审意见 → 报到湖州市发改能源处 → 市专家评审会 → 修改签字 → 市发改出具批复意见。'
+    ],
+    contact: { unit: '建设发展局', person: '张家喜', phone: '15088380129' },
+    address: '长合区管委会1206办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '固定资产节能审查承诺书（年用能1000吨标准煤以下）',
+      '节能审查报告（年用能1000吨标准煤以上）',
+      '主要产品、工艺流程、设备用能说明'
+    ]
+  },
+  5: {
+    title: '05 建设项目环境影响评价',
+    process: [
+      '1、选定环评单位；',
+      '2、编制环评方案；',
+      '3、提交生态环境局评审；',
+      '4、编制正式文本。',
+      '注：根据项目对环境的影响程度，分为环境影响报告书、报告表、登记表三类，具体类别请咨询经办人。'
+    ],
+    contact: { unit: '生态环境局长合区分局', person: '肖美祎', phone: '15158132211' },
+    address: '长合区管委会1106办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '环境影响评价文件（报告书/报告表/登记表）',
+      '相关申报表格（具体请联系经办人）'
+    ]
+  },
+  6: {
+    title: '06 房屋建筑和市政工程勘察项目信息报备',
+    process: [
+      '在地勘作业前48小时内，到长合区建设发展局进行勘察项目信息报备。'
+    ],
+    contact: { unit: '建设发展局', person: '徐培', phone: '13757233262' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '勘察项目信息报备表',
+      '相关项目资料（具体请联系经办人）'
+    ]
+  },
+  7: {
+    title: '07 施工图设计文件审查',
+    process: [
+      '1、一般工业厂房项目（审查内容为建筑、消防、防雷）；',
+      '2、既有建筑室内装饰工程（审查类别分建筑装饰和消防设施）；',
+      '3、幕墙工程（审查内容为建筑，专项类别选幕墙）；',
+      '4、道路、桥梁、市政工程（审查内容为市政工程设计）。'
+    ],
+    contact: { unit: '建设发展局', person: '徐培', phone: '13757233262' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '完整施工图设计文件',
+      '结构计算书',
+      '消防设计专篇',
+      '其他相关设计资料（具体请联系经办人）'
+    ]
+  },
+  8: {
+    title: '08 建设工程消防设计审查',
+    process: [
+      '适用于特殊建设工程消防设计审查（甲、乙类厂房、车间、仓库）：',
+      '建设单位准备审查申请材料 → 建设发展局行政审批岗上传相关材料 → 行政审批岗和局领导审核通过 → 出具《特殊建设工程消防设计审查意见书》'
+    ],
+    contact: { unit: '建设发展局', person: '邵万良', phone: '15868296259' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '消防设计审查申请表',
+      '消防设计文件（含消防设计专篇）',
+      '建设工程规划许可文件',
+      '设计单位资质证明文件'
+    ]
+  },
+  9: {
+    title: '09 建设工程规划许可',
+    contact: { unit: '自然资源和规划局长合区分局', person: '吴春平', phone: '15906721241' },
+    address: '长合区管委会1217办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '建设工程规划许可申请表',
+      '营业执照',
+      '土地使用权属证明',
+      '建设工程设计方案（含总平面图）',
+      '施工图设计文件',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  10: {
+    title: '10 规划用地许可',
+    contact: { unit: '自然资源和规划局长合区分局', person: '吴春平', phone: '15906721241' },
+    address: '长合区管委会1217办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '建设用地规划许可申请表',
+      '营业执照',
+      '项目立项/备案文件',
+      '土地使用权出让合同（或划拨决定书）',
+      '红线图',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  11: {
+    title: '11 城镇污水排入排水管网许可证',
+    process: [
+      '（一）施工期间污水排放：联系建设发展局办理；',
+      '（二）生产期间污水排放：联系生态环境局长合区分局办理。'
+    ],
+    contacts: [
+      { unit: '建设发展局（施工期）', person: '周瓒', phone: '19851902286', address: '长合区管委会1210办公室' },
+      { unit: '生态环境局长合区分局（生产期）', person: '严宏亮', phone: '18667210662', address: '长合区管委会1104办公室' }
+    ],
+    materials: [
+      '排水许可申请表',
+      '排水户内部排水管网图纸',
+      '排水水质检测报告',
+      '污水处理设施相关资料',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  12: {
+    title: '12 建筑工程施工许可证',
+    contact: { unit: '建设发展局', person: '周瓒', phone: '19851902286' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '建筑工程施工许可申请表',
+      '建设工程规划许可证',
+      '施工图设计文件审查合格书',
+      '施工、监理合同',
+      '质量安全监督登记表',
+      '建设资金已落实证明',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  13: {
+    title: '13 建设工程质量安全监督登记',
+    contact: { unit: '建设发展局', person: '芮志龙', phone: '18815282247' },
+    address: '长合区管委会1215办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '质量安全监督登记表',
+      '施工图设计文件审查合格书',
+      '施工、监理单位资质证书',
+      '施工组织设计方案',
+      '安全生产许可证',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  14: {
+    title: '14 建筑工程节点验收及竣工验收',
+    contact: { unit: '建设发展局', person: '芮志龙', phone: '18815282247' },
+    address: '长合区管委会1204办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '验收申请表',
+      '施工自评报告',
+      '监理评估报告',
+      '设计质量检查报告',
+      '勘察质量检查报告',
+      '质量控制资料',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  15: {
+    title: '15 土地核验和规划核实',
+    contact: { unit: '自然资源和规划局长合区分局', person: '钟国超', phone: '15968210618' },
+    address: '长合区管委会1204办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '土地核验申请表',
+      '规划核实申请表',
+      '不动产权证（或土地证）',
+      '竣工测量报告',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  16: {
+    title: '16 建设工程消防设计审查验收',
+    process: [
+      '类型一：特殊建设工程消防验收（甲、乙类厂房、车间、仓库）',
+      '建设单位准备验收申请材料 → 建设发展局行政审批岗上传 → 建设局现场评定 → 行政审批岗和局领导审核通过 → 出具《特殊建设工程消防验收意见书》',
+      '',
+      '类型二：建设工程消防验收备案（除甲、乙类厂房外的其他工程）',
+      '建设单位准备备案申请材料 → 行政审批岗上传 → 备案抽查 →',
+      '  抽中：建设局现场检查 → 行政审批岗和局领导审核通过 → 出具《建设工程竣工验收消防备案抽查意见书》',
+      '  未抽中：出具《建设工程消防验收备案凭证》'
+    ],
+    contact: { unit: '建设发展局', person: '邵万良', phone: '15868296259' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '消防验收申请表',
+      '工程竣工验收报告',
+      '消防设施检测报告',
+      '消防产品质量合格证明文件',
+      '消防设计审查意见书',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  },
+  17: {
+    title: '17 竣工验收备案',
+    contact: { unit: '建设发展局', person: '周瓒', phone: '19851902286' },
+    address: '长合区管委会1210办公室（安吉县天子湖镇东阳路1号）',
+    materials: [
+      '竣工验收备案表',
+      '工程竣工验收报告',
+      '规划核实意见',
+      '消防验收意见书',
+      '质量安全监督报告',
+      '其他相关材料（具体请联系经办人）'
+    ]
+  }
+};
+
+// ===== MODAL FUNCTIONS =====
+function openDetail(id) {
+  const d = data[id];
+  if (!d) return;
+
+  document.getElementById('modalTitle').textContent = d.title;
+  const body = document.getElementById('modalBody');
+
+  let html = '';
+
+  // Process
+  if (d.process && d.process.length > 0) {
+    html += '<h3>📋 办理流程</h3>';
+    html += '<div class="info-card"><ul>';
+    d.process.forEach(step => {
+      html += '<li>' + step + '</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  // Materials
+  if (d.materials && d.materials.length > 0) {
+    html += '<h3>📎 提交资料清单</h3>';
+    html += '<div class="info-card"><table><thead><tr><th>序号</th><th>材料名称</th></tr></thead><tbody>';
+    d.materials.forEach((m, i) => {
+      html += '<tr><td style="text-align:center;">' + (i+1) + '</td><td>' + m + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+  }
+
+  // Contact(s)
+  if (d.contacts) {
+    html += '<h3>📞 经办负责人</h3>';
+    html += '<div class="contact">';
+    d.contacts.forEach(c => {
+      html += '<div class="contact-item">';
+      html += '<div class="label">经办单位</div><div class="value">' + c.unit + '</div>';
+      html += '<div class="label" style="margin-top:8px;">经办人 / 电话</div><div class="value">' + c.person + ' / ' + c.phone + '</div>';
+      html += '<div class="label" style="margin-top:8px;">服务地址</div><div class="value" style="font-size:13px;">' + c.address + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  } else if (d.contact) {
+    html += '<h3>📞 经办负责人</h3>';
+    html += '<div class="contact">';
+    html += '<div class="contact-item">';
+    html += '<div class="label">经办单位</div><div class="value">' + d.contact.unit + '</div>';
+    html += '<div class="label" style="margin-top:8px;">经办人</div><div class="value">' + d.contact.person + '</div>';
+    html += '<div class="label" style="margin-top:8px;">联系电话</div><div class="value">' + d.contact.phone + '</div>';
+    html += '</div>';
+    html += '<div class="contact-item">';
+    html += '<div class="label">服务地址</div><div class="value" style="font-size:14px;">' + (d.address || '—') + '</div>';
+    html += '</div>';
+    html += '</div>';
+  }
+
+  body.innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+  if (event.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// Keyboard ESC to close
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeModalDirect();
+  }
+});
+</script>
+
+</body>
+</html>
